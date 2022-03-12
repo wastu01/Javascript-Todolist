@@ -10,6 +10,7 @@ var number,li,i=10;
 // querySelectorAll 靜態
 // https://developer.mozilla.org/zh-TW/docs/Web/API/NodeList
 
+function DefaultList() {
   ul.setAttribute('class', 'wrap');
   var t;
   var original = ["網頁設計", "物聯網設計" , "CSS版型設計" , "數位學習系統" ]; 
@@ -25,14 +26,18 @@ var number,li,i=10;
 
     t = document.createTextNode(element);
 
-    console.log(t);
+    // console.log(t);
 
     li.innerHTML = li.innerHTML + element;
 
     number = document.querySelectorAll("ul li");
     document.getElementById('Count').innerHTML = number.length;
   }
-  console.log(number)
+  // console.log(number)
+
+
+}
+ 
 
 
 // 中文排序會依照編碼大小
