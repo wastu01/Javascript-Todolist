@@ -1,8 +1,8 @@
-/* ui li ¸m¤¤¤èªk https://muki.tw/tech/ul-align-center-in-css/ */
-/* js ¼u¸õµøµ¡ https://www.fooish.com/javascript/alert-confirm-prompt.html */
+/* ui li ï¿½mï¿½ï¿½ï¿½ï¿½k https://muki.tw/tech/ul-align-center-in-css/ */
+/* js ï¿½uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ https://www.fooish.com/javascript/alert-confirm-prompt.html */
 
-/* UI ¼ËªO¡Ghttps://codepen.io/mrwang01/pen/LogyKE */
-/* position ÄÝ©Ê½Õ¾ã https://medium.com/ui-ux%E7%B7%B4%E5%8A%9F%E5%9D%8A/position-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5-5931254e5203 */
+/* UI ï¿½ËªOï¿½Ghttps://codepen.io/mrwang01/pen/LogyKE */
+/* position ï¿½Ý©Ê½Õ¾ï¿½ https://medium.com/ui-ux%E7%B7%B4%E5%8A%9F%E5%9D%8A/position-%E5%B1%AC%E6%80%A7%E7%9A%84%E5%9F%BA%E7%A4%8E%E6%A6%82%E5%BF%B5-5931254e5203 */
 
 /* please use Big-5 code open cuz school server can not use with UTF-8 */
 @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
@@ -80,16 +80,16 @@ body {
 }
 
 .IO{
-  padding: 0.8em;
-  position: relative; /*ªí¥Ü¥¦¬O°ò·Ç¤¸¯À*/
+  padding: 0.2em;
+  /* position: relative;  */
 
 }
 
 input[type="text"]
 {
-  position: absolute;
+  /* position: absolute;
   top: 5px;
-  left: 90px;
+  left: 90px; */
 padding:5px 15px; 
 border:2px black solid;
 cursor:pointer;
@@ -99,9 +99,9 @@ text-align: center;
 }
 
 .btn {
-  position: absolute;
+  /* position: absolute;
   top: 0px;
-  left: 280px;
+  left: 280px; */
 padding: 0.5em;;
 outline: none;
 color:#fff;
