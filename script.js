@@ -3,24 +3,58 @@
 
 // 這篇拯救了我👍 https://medium.com/@estherchen000/%E7%AD%86%E8%A8%98-%E4%BD%BF%E7%94%A8javascript%E6%93%8D%E4%BD%9Cdom-%E7%8D%B2%E5%8F%96%E5%85%83%E7%B4%A0%E7%AF%87-1aaa52666e80
 
-var ul = document.createElement('ul');
-var number,li,i=10;
+var ul = document.querySelector('#list');
+var number;
+var li;
 
 
 // querySelectorAll 靜態
 // https://developer.mozilla.org/zh-TW/docs/Web/API/NodeList
 
+function Show(){
+  var render = document.getElementById('render');
+  var show = document.getElementById('show');
+
+  if (render.style.display === 'none') {
+    render.style.display = 'block';
+    show.innerText = "隱藏";
+    // number = document.querySelectorAll("ul li");
+  }
+  else {
+    render.style.display = 'none';
+    show.innerText = "顯示資料";
+
+
+  }
+
+}
+function Count(){
+
+
+  document.getElementById('Count').innerHTML = document.querySelectorAll("ul li").length;
+  number = document.querySelectorAll("ul li").length;
+  console.log(number);
+
+}
+
 function DefaultList() {
+
   ul.setAttribute('class', 'wrap');
   var t;
   var original = ["網頁設計", "物聯網設計" , "CSS版型設計" , "數位學習系統" ]; 
 
+  var flag = false;
+
+  if (flag == false) {
+    
+  document.getElementById("default").disabled=true;
   document.getElementById('render').appendChild(ul);
   original.forEach(renderOriginalList);
 
   function renderOriginalList(element, index, arr) {
     li = document.createElement('li');
     li.setAttribute('class', 'item');
+    count = document.getElementById('Count').innerHTML;
 
     ul.appendChild(li);
 
@@ -29,13 +63,15 @@ function DefaultList() {
     // console.log(t);
 
     li.innerHTML = li.innerHTML + element;
-
-    number = document.querySelectorAll("ul li");
-    document.getElementById('Count').innerHTML = number.length;
   }
   // console.log(number)
-
-
+  }
+  flag = true;
+ 
+        setTimeout(function () {
+            document.getElementById("default").disabled=false;
+            flag = false;
+        }, 15000);
 }
  
 
@@ -55,27 +91,40 @@ function DefaultList() {
 
     li = document.createElement('li');
     li.setAttribute('class', 'item');
-    li.textContent = `這是第${i+1}個 LI 元素`;
-    i = i+1;
+    li.textContent = input.value;
     ul.appendChild(li);
     // ul.innerHTML += "<li>" + input.value + "</li>";
-    number = document.querySelectorAll("ul li");
-    document.getElementById('Count').innerHTML = number.length;
-  
+    
+
     for (let i = 0; i < number.length; i++){
       number[i].style.backgroundColor = "#15141A";
     }
   
-    console.log(number)
-
   }
 
 
   }
 
   function DelList() {
-    original.pop();  
+
+    let list = document.querySelector('#list');
+    let ul = document.querySelector('#list li:nth-last-child(1)');
+    list.removeChild(ul) 
+    console.log(list);
   }
+
+  function SortList() {
+    
+    let list = document.querySelector('#list');
+
+
+  }
+//     original.pop();  
+//     let list = document.querySelector('#list') // 取得父層容器節點
+// let oldList = document.querySelectorAll('li')[1] // 先選到全部的 li 在用索引值選出我們要指定的
+// list.removeChild(oldList) // 移除我們指定的 oldList
+
+
 
 
  function alert() {
