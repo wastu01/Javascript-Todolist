@@ -1,15 +1,7 @@
-/* please use Big-5 code open cuz school server can not use with UTF-8 */
-// https://www.runoob.com/jsref/met-document-createtextnode.html
-
-// 這篇拯救了我👍 https://medium.com/@estherchen000/%E7%AD%86%E8%A8%98-%E4%BD%BF%E7%94%A8javascript%E6%93%8D%E4%BD%9Cdom-%E7%8D%B2%E5%8F%96%E5%85%83%E7%B4%A0%E7%AF%87-1aaa52666e80
-
 var ul = document.querySelector('#list');
-var number;
+var text = document.querySelector('#text')
+var number = document.querySelectorAll("ul li");
 var li;
-
-
-// querySelectorAll 靜態
-// https://developer.mozilla.org/zh-TW/docs/Web/API/NodeList
 
 function Show(){
   var render = document.getElementById('render');
@@ -18,7 +10,6 @@ function Show(){
   if (render.style.display === 'none') {
     render.style.display = 'block';
     show.innerText = "隱藏";
-    // number = document.querySelectorAll("ul li");
   }
   else {
     render.style.display = 'none';
@@ -30,14 +21,21 @@ function Show(){
 }
 function Count(){
 
-
-  document.getElementById('Count').innerHTML = document.querySelectorAll("ul li").length;
-  number = document.querySelectorAll("ul li").length;
-  console.log(number);
+  number = document.querySelectorAll("ul li");
+  document.getElementById('Count').innerHTML = number.length;
+    
+  for (let i = 0; i < number.length; i++){
+    // number[i].style.backgroundColor = "#15141A";
+  
+  }
 
 }
 
 function DefaultList() {
+
+  
+  var defaults = document.getElementById('default');
+  // default 保留字
 
   ul.setAttribute('class', 'wrap');
   var t;
@@ -47,20 +45,16 @@ function DefaultList() {
 
   if (flag == false) {
     
-  document.getElementById("default").disabled=true;
+  defaults.disabled=true;
+  defaults.innerText = "資料已載入";
   document.getElementById('render').appendChild(ul);
   original.forEach(renderOriginalList);
 
   function renderOriginalList(element, index, arr) {
     li = document.createElement('li');
     li.setAttribute('class', 'item');
-    count = document.getElementById('Count').innerHTML;
 
     ul.appendChild(li);
-
-    t = document.createTextNode(element);
-
-    // console.log(t);
 
     li.innerHTML = li.innerHTML + element;
   }
@@ -69,9 +63,12 @@ function DefaultList() {
   flag = true;
  
         setTimeout(function () {
-            document.getElementById("default").disabled=false;
+            defaults.disabled=false;
+            defaults.innerText = "再次載入資料";
             flag = false;
-        }, 15000);
+        }, 5000);
+    
+  Count();
 }
  
 
@@ -91,14 +88,23 @@ function DefaultList() {
 
     li = document.createElement('li');
     li.setAttribute('class', 'item');
-    li.textContent = input.value;
+    i = document.createElement('i');
+    li.setAttribute('class', 'fa-solid fa-circle-xmark');
+    // li.textContent = input.value;
+    li.appendChild(i)
     ul.appendChild(li);
-    // ul.innerHTML += "<li>" + input.value + "</li>";
-    
+    li.textContent = input.value;
+    input.value = "";
 
-    for (let i = 0; i < number.length; i++){
-      number[i].style.backgroundColor = "#15141A";
-    }
+
+    // str += `
+    // <li>
+    //   <a data-num=${i}>
+    //     <i class='fa-solid fa-circle-xmark'></i>
+    //     ${renderList[i]}
+    //   </a>
+    // </li>`;
+    Count();
   
   }
 
@@ -109,22 +115,69 @@ function DefaultList() {
 
     let list = document.querySelector('#list');
     let ul = document.querySelector('#list li:nth-last-child(1)');
-    list.removeChild(ul) 
-    console.log(list);
+    list.removeChild(ul) ;
+    Count();
   }
 
-  function SortList() {
+  function Clear() {
     
-    let list = document.querySelector('#list');
 
+    let list = document.querySelector('#list');
+    let li   = document.querySelectorAll('.item');
+    let h3 = document.querySelector('#h3');
+     
+    h3.classList.add("list", "alert");
+    h3.innerText = "您刪除了"+ li.length +"本";
+    
+     
+    // showAlert('已將移除', 'success');
+    list.innerHTML = '';
+    console.log(li.length);
+    
+    
+    Count();    
+  }
+
+
+  function showAlert(message, className) {
+
+    const li   = document.querySelectorAll('.item');
+    const div = document.createElement('div');
+    
+    div.className = `alert alert-${className}`;
+    div.appendChild(document.createTextNode(message));
+    div.innerText +=  li.length +"本";
+    const text = document.querySelector('#text');
+
+    text.insertBefore(div, h3);
+    // 元素 ， 位置
+    text.appendChild(h3);
+
+    
+
+    // Vanish in 3 seconds
+    var intervalid = setInterval( 'Seconds()', 3000);
+    const alert = document.getElementsByClassName('alert');
+    console.log(alert);
 
   }
-//     original.pop();  
-//     let list = document.querySelector('#list') // 取得父層容器節點
-// let oldList = document.querySelectorAll('li')[1] // 先選到全部的 li 在用索引值選出我們要指定的
-// list.removeChild(oldList) // 移除我們指定的 oldList
+  function Seconds(){
+    
+    const alert = document.getElementsByClassName('alert');
 
+    
+    for ( var i=0; i < alert.length; i++){
+      console.log(alert[i].innerHTML);
+      alert[i].remove();
+      
+      return;
 
+    }
+   
+
+  }
+
+  // setTimeout( 'console.log("1 秒後執行 console")', 2000);
 
 
  function alert() {
@@ -133,55 +186,38 @@ function DefaultList() {
     title: '新增作業失敗',
     text: '請輸入正確的格式，已避免系統被玩壞哦！',
     html:
-    '請 在 <b>確 認</b> 一 次 你 有 輸 入 內 容 (╯°Д°）╯' ,
+    '請 再 <b>確 認</b> 一 次 你 有 輸 入 內 容 (╯°Д°）╯' ,
     confirmButtonText:
     '好哦我了解 <i class="fa fa-thumbs-up"></i>',
     confirmButtonAriaLabel: 'understand',
-    footer: '<a href="https://itechdct.ntcu.edu.tw/ntcudct_courses/DigitalCommunication/11024/show_web_write.aspx?ftp_dir=3_class/&pathname=03_2_array_for_list" target=”_blank”>為何會出現此訊息？你說呢？</a>'
+    footer: '<a href="https://github.com/wastu01/Javascript-Todolist" target=”_blank”>為何會出現此訊息？請自行研究</a>'
     }
   );
 }
 function confirm() {
+  let li   = document.querySelectorAll('.item');
   Swal.fire({
       title: "操作確認",
-      text: "請點選你想按的按鈕",
+      text: "刪除後資料無法回覆，你要確定ㄟ",
       showCancelButton: true
   }).then(function(result) {
      if (result.value) {
-          Swal.fire("您按了OK");
+          Swal.fire("已刪除"+li.length+"本");
+          Clear();
+          Count();
      }
      else {
-         Swal.fire("您選擇了Cancel");
+         Swal.fire("OK 資料沒有刪除");
      }
   });
 }
 
-    
-//   btn.addEventListener('click',function(e){
-//       alert(btn.textContent);
-//     }) 
-// 測試用
+function Sort(){
+  var sorts = document.getElementById('sort');
+  sorts.disabled=true;
+  sorts.innerText = "下一版本才有此功能";
+}
 
-// 且輸入完後要清除文字
-// 重新整理後，儲存資料還在
-// 新增了，那怎麼刪除？
-// 優化使用者體驗
-// 有時間再做～
-
-    
-
-  
-// function addBook(){
-// 	var list = document.getElementById('list');
-// 	var book1 = document.getElementById('book');
-// 	if (book1.value==""){
-// 		alert("請輸入資料");
-// 	}
-// 	else{
-// 		list.innerHTML += "<li>" + book1.value + "</li>"; //資料取得以物件.value(book1.value)應用
-// 		document.getElementById('bookCount').innerHTML = list.children.length;
-// 	}
-// }
   
   
   
