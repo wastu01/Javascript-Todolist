@@ -109,7 +109,9 @@ function DefaultList() {
     li.appendChild(a);
     ul.appendChild(li);
 
+    showAlert('成功新增', 'primary');
     input.value = "";
+
 
     Count();
   
@@ -119,10 +121,18 @@ function DefaultList() {
   }
 
   function DelList() {
-
+    let deletes = document.getElementById('delete');
+    let number = document.querySelectorAll("ul li");
     let list = document.querySelector('#list');
     let ul = document.querySelector('#list li:nth-last-child(1)');
-    list.removeChild(ul) ;
+    console.log(number);
+    if (number.length != 0) {
+      
+      list.removeChild(ul) ;
+  
+    }
+    deletes.disabled  =  true;
+    deletes.innerText = "刪除前請先新增";
     Count();
   }
 
@@ -137,12 +147,12 @@ function DefaultList() {
     h3.innerText = "您上次刪除了"+ number.length +"本";
     
      
-    // showAlert('已將移除', 'success');
+    showAlert('成功移除', 'danger');
     list.innerHTML = '';
-    console.log(li.length);
+    number = [];
     
-    
-    Count();    
+    console.log(number);
+    // Count();    
   }
 
 
@@ -151,7 +161,7 @@ function DefaultList() {
     const li   = document.querySelectorAll('.item');
     const div = document.createElement('div');
     
-    div.className = `alert alert-${className}`;
+    div.className = `alert alert-${className} text-center`;
     div.appendChild(document.createTextNode(message));
     div.innerText +=  li.length +"本";
     const text = document.querySelector('#text');
@@ -163,7 +173,7 @@ function DefaultList() {
     
 
     // Vanish in 3 seconds
-    var intervalid = setInterval( 'Seconds()', 3000);
+    var intervalid = setInterval( 'Seconds()', 5000);
     const alert = document.getElementsByClassName('alert');
     console.log(alert);
 
@@ -206,7 +216,9 @@ function confirm() {
   Swal.fire({
       title: "操作確認",
       text: "刪除後資料無法回覆，你要確定ㄟ",
-      showCancelButton: true
+      showCancelButton: true,
+      confirmButtonText: '確定',
+      cancelButtonText: '取消'
   }).then(function(result) {
      if (result.value) {
           Swal.fire("已刪除"+number.length+"本");
@@ -219,10 +231,16 @@ function confirm() {
   });
 }
 
-function Sort(){
+function Sort(message){
   var sorts = document.getElementById('sort');
   sorts.disabled=true;
-  sorts.innerText = "下一版本才有此功能";
+  sorts.innerText = message;
+}
+function Search(message) {
+  var search = document.getElementById('search');
+  search.disabled=true;
+  search.innerText = message;
+  
 }
 
   
