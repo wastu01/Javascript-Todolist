@@ -1,6 +1,6 @@
 var ul = document.querySelector('#list');
 var text = document.querySelector('#text')
-var number = document.querySelectorAll("ul li");
+var number;
 var li;
 
 function Show(){
@@ -17,6 +17,7 @@ function Show(){
 
 
   }
+  Count();
 
 }
 function Count(){
@@ -25,7 +26,7 @@ function Count(){
   document.getElementById('Count').innerHTML = number.length;
     
   for (let i = 0; i < number.length; i++){
-    // number[i].style.backgroundColor = "#15141A";
+    number[i].style.backgroundColor = "#15141A";
   
   }
 
@@ -50,15 +51,23 @@ function DefaultList() {
   document.getElementById('render').appendChild(ul);
   original.forEach(renderOriginalList);
 
-  function renderOriginalList(element, index, arr) {
-    li = document.createElement('li');
+  function renderOriginalList(element, index, original) {
+
+    let i = document.createElement('i');
+    let a = document.createElement('a');
+    let li = document.createElement('li');
+ 
+    i.setAttribute('class', 'fa-solid fa-circle-xmark');
+    a.setAttribute('data-num', original.length);
     li.setAttribute('class', 'item');
 
+    a.appendChild(i);
+    li.appendChild(a);
     ul.appendChild(li);
 
     li.innerHTML = li.innerHTML + element;
   }
-  // console.log(number)
+  
   }
   flag = true;
  
@@ -86,24 +95,22 @@ function DefaultList() {
  
   else{
 
-    li = document.createElement('li');
+
+    let i = document.createElement('i');
+    let a = document.createElement('a');
+    let li = document.createElement('li');
+
+    i.setAttribute('class', 'fa-solid fa-circle-xmark');
+    a.setAttribute('data-num', '0');
     li.setAttribute('class', 'item');
-    i = document.createElement('i');
-    li.setAttribute('class', 'fa-solid fa-circle-xmark');
-    // li.textContent = input.value;
-    li.appendChild(i)
-    ul.appendChild(li);
+
     li.textContent = input.value;
+    a.appendChild(i);
+    li.appendChild(a);
+    ul.appendChild(li);
+
     input.value = "";
 
-
-    // str += `
-    // <li>
-    //   <a data-num=${i}>
-    //     <i class='fa-solid fa-circle-xmark'></i>
-    //     ${renderList[i]}
-    //   </a>
-    // </li>`;
     Count();
   
   }
@@ -123,11 +130,11 @@ function DefaultList() {
     
 
     let list = document.querySelector('#list');
-    let li   = document.querySelectorAll('.item');
+    let number = document.querySelectorAll("ul li");
     let h3 = document.querySelector('#h3');
      
     h3.classList.add("list", "alert");
-    h3.innerText = "您刪除了"+ li.length +"本";
+    h3.innerText = "您上次刪除了"+ number.length +"本";
     
      
     // showAlert('已將移除', 'success');
@@ -195,14 +202,14 @@ function DefaultList() {
   );
 }
 function confirm() {
-  let li   = document.querySelectorAll('.item');
+  let number = document.querySelectorAll("ul li");
   Swal.fire({
       title: "操作確認",
       text: "刪除後資料無法回覆，你要確定ㄟ",
       showCancelButton: true
   }).then(function(result) {
      if (result.value) {
-          Swal.fire("已刪除"+li.length+"本");
+          Swal.fire("已刪除"+number.length+"本");
           Clear();
           Count();
      }
