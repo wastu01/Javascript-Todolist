@@ -31,6 +31,7 @@ function Count(){
   }
 
 }
+Count();
 
 function DefaultList() {
 
@@ -99,6 +100,7 @@ function DefaultList() {
     let i = document.createElement('i');
     let a = document.createElement('a');
     let li = document.createElement('li');
+    
 
     i.setAttribute('class', 'fa-solid fa-circle-xmark');
     a.setAttribute('data-num', '0');
@@ -109,7 +111,7 @@ function DefaultList() {
     li.appendChild(a);
     ul.appendChild(li);
 
-    showAlert('成功新增', 'primary');
+    showAlert('成功新增', 'primary', '1');
     input.value = "";
 
 
@@ -127,12 +129,14 @@ function DefaultList() {
     let ul = document.querySelector('#list li:nth-last-child(1)');
     console.log(number);
     if (number.length != 0) {
-      
+      deletes.disabled  =  false;
       list.removeChild(ul) ;
   
+    }else{
+      deletes.disabled  =  true;
+      deletes.innerText = "刪除前請先新增";
     }
-    deletes.disabled  =  true;
-    deletes.innerText = "刪除前請先新增";
+
     Count();
   }
 
@@ -147,23 +151,22 @@ function DefaultList() {
     h3.innerText = "您上次刪除了"+ number.length +"本";
     
      
-    showAlert('成功移除', 'danger');
+    showAlert('成功移除', 'danger' , number.length);
     list.innerHTML = '';
     number = [];
-    
-    console.log(number);
+
     // Count();    
   }
 
 
-  function showAlert(message, className) {
+  function showAlert(message, className, number) {
 
     const li   = document.querySelectorAll('.item');
     const div = document.createElement('div');
     
     div.className = `alert alert-${className} text-center`;
     div.appendChild(document.createTextNode(message));
-    div.innerText +=  li.length +"本";
+    div.innerText +=  number +"本";
     const text = document.querySelector('#text');
 
     text.insertBefore(div, h3);
