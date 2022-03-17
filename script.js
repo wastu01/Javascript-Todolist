@@ -111,7 +111,7 @@ function DefaultList() {
     li.appendChild(a);
     ul.appendChild(li);
 
-    showAlert('成功新增', 'primary', '1');
+    // showAlert('成功新增', 'primary', '1');
     input.value = "";
 
 
@@ -151,7 +151,7 @@ function DefaultList() {
     h3.innerText = "您上次刪除了"+ number.length +"本";
     
      
-    showAlert('成功移除', 'danger' , number.length);
+    // showAlert('成功移除', 'danger' , number.length);
     list.innerHTML = '';
     number = [];
 
