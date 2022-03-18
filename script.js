@@ -2,14 +2,18 @@ var ul = document.querySelector('#list');
 var text = document.querySelector('#text')
 var number;
 var li;
+var deletes = document.getElementById('delete');
 
 function Show(){
+
   var render = document.getElementById('render');
   var show = document.getElementById('show');
+  // show 按鈕， render 清單區塊
 
   if (render.style.display === 'none') {
     render.style.display = 'block';
     show.innerText = "隱藏";
+   
   }
   else {
     render.style.display = 'none';
@@ -34,8 +38,8 @@ function Count(){
 Count();
 
 function DefaultList() {
-
-  
+  deletes.innerText = "移除末項資料";
+  deletes.disabled  =  false;
   var defaults = document.getElementById('default');
   // default 保留字
 
@@ -88,6 +92,10 @@ function DefaultList() {
 
 
  function Newlist() {
+
+  let h3 = document.querySelector('#h3');
+  deletes.innerText = "移除末項資料";
+  deletes.disabled  =  false;
   
 
   if(input.value == ""){
@@ -111,7 +119,7 @@ function DefaultList() {
     li.appendChild(a);
     ul.appendChild(li);
 
-    // showAlert('成功新增', 'primary', '1');
+    showAlert('成功新增', 'primary', '1');
     input.value = "";
 
 
@@ -123,13 +131,14 @@ function DefaultList() {
   }
 
   function DelList() {
-    let deletes = document.getElementById('delete');
+   
     let number = document.querySelectorAll("ul li");
     let list = document.querySelector('#list');
     let ul = document.querySelector('#list li:nth-last-child(1)');
     console.log(number);
     if (number.length != 0) {
       deletes.disabled  =  false;
+      deletes.innerText = "移除末項資料";
       list.removeChild(ul) ;
   
     }else{
@@ -151,7 +160,7 @@ function DefaultList() {
     h3.innerText = "您上次刪除了"+ number.length +"本";
     
      
-    // showAlert('成功移除', 'danger' , number.length);
+    showAlert('成功移除', 'danger' , number.length);
     list.innerHTML = '';
     number = [];
 
@@ -170,30 +179,37 @@ function DefaultList() {
     const text = document.querySelector('#text');
 
     text.insertBefore(div, h3);
-    // 元素 ， 位置
-    text.appendChild(h3);
+    // text.appendChild(h3);
 
     
 
     // Vanish in 3 seconds
-    var intervalid = setInterval( 'Seconds()', 5000);
+    var intervalid = setTimeout( 'Seconds()', 3000);
     const alert = document.getElementsByClassName('alert');
     console.log(alert);
+    // clearInterval(intervalid);
 
   }
   function Seconds(){
     
     const alert = document.getElementsByClassName('alert');
+    const creh3 = document.createElement('h3');
+    const text = document.querySelector('#text');
+    const h3 = document.querySelector('#h3');
 
+    alert[0].remove();
     
-    for ( var i=0; i < alert.length; i++){
-      console.log(alert[i].innerHTML);
-      alert[i].remove();
-      
-      return;
+    // for ( var i=0; i < alert.length; i++){
+    //   console.log(alert[i].innerHTML);
 
-    }
-   
+    //   alert[i].remove();
+      
+    //   return;
+
+    // }
+    // creh3.setAttribute('id', 'h3');
+    // creh3.className = `lists`;
+    // text.insertBefore(creh3, h3);
 
   }
 

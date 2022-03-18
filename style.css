@@ -161,6 +161,9 @@ a:active{
 #render {
 
 } */
+#render{
+  display: block;
+}
 
 ul.wrap {
   list-style-type: none;
